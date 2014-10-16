@@ -22,6 +22,9 @@
 		8993864519F009D30006BD34 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8993862919F009D20006BD34 /* CoreData.framework */; };
 		8993864D19F009D30006BD34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8993864B19F009D30006BD34 /* InfoPlist.strings */; };
 		8993864F19F009D30006BD34 /* EventsPlannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8993864E19F009D30006BD34 /* EventsPlannerTests.m */; };
+		8993865919F00B630006BD34 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8993865819F00B630006BD34 /* Storyboard.storyboard */; };
+		8993865C19F00FC50006BD34 /* EventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8993865B19F00FC50006BD34 /* EventViewController.m */; };
+		8993865F19F010280006BD34 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8993865E19F010280006BD34 /* EventDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,11 @@
 		8993864A19F009D30006BD34 /* EventsPlannerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EventsPlannerTests-Info.plist"; sourceTree = "<group>"; };
 		8993864C19F009D30006BD34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8993864E19F009D30006BD34 /* EventsPlannerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsPlannerTests.m; sourceTree = "<group>"; };
+		8993865819F00B630006BD34 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		8993865A19F00FC50006BD34 /* EventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventViewController.h; sourceTree = "<group>"; };
+		8993865B19F00FC50006BD34 /* EventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventViewController.m; sourceTree = "<group>"; };
+		8993865D19F010280006BD34 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
+		8993865E19F010280006BD34 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +127,11 @@
 				8993863519F009D20006BD34 /* AppDelegate.m */,
 				8993863A19F009D20006BD34 /* Images.xcassets */,
 				8993863719F009D20006BD34 /* EventsPlanner.xcdatamodeld */,
+				8993865819F00B630006BD34 /* Storyboard.storyboard */,
+				8993865A19F00FC50006BD34 /* EventViewController.h */,
+				8993865B19F00FC50006BD34 /* EventViewController.m */,
+				8993865D19F010280006BD34 /* EventDetailViewController.h */,
+				8993865E19F010280006BD34 /* EventDetailViewController.m */,
 				8993862C19F009D20006BD34 /* Supporting Files */,
 			);
 			path = EventsPlanner;
@@ -230,6 +243,7 @@
 			files = (
 				8993863019F009D20006BD34 /* InfoPlist.strings in Resources */,
 				8993863B19F009D20006BD34 /* Images.xcassets in Resources */,
+				8993865919F00B630006BD34 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8993863619F009D20006BD34 /* AppDelegate.m in Sources */,
+				8993865F19F010280006BD34 /* EventDetailViewController.m in Sources */,
+				8993865C19F00FC50006BD34 /* EventViewController.m in Sources */,
 				8993863219F009D20006BD34 /* main.m in Sources */,
 				8993863919F009D20006BD34 /* EventsPlanner.xcdatamodeld in Sources */,
 			);

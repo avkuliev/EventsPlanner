@@ -88,7 +88,7 @@
     // Configure the cell...
     NSManagedObject *event = [self.events objectAtIndex:indexPath.row];
     [cell.textLabel setText:[event valueForKey:@"title"]];
-    
+    [cell.detailTextLabel setText:[[event valueForKey:@"date"] description]];
     
     return cell;
 }
@@ -148,6 +148,7 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
     if ([[segue identifier] isEqualToString:@"UpdateEvent"]) {
         NSManagedObject *selectedEvent = [self.events objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         EventDetailViewController *destViewController = segue.destinationViewController;

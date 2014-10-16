@@ -38,8 +38,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.titleTextField.delegate = self;
+    
     if (self.event) {
         [self.titleTextField setText:[self.event valueForKey:@"title"]];
+        [self.datePicker setDate:[self.event valueForKey:@"date"]];
     }
 }
 
@@ -62,16 +65,20 @@
 
 - (IBAction)save:(id)sender {
     
+    [self.titleTextField resignFirstResponder];
+    
     NSManagedObjectContext *context = [self managedObjectContext];
     
     if (self.event) {
         // Update existing event
         [self.event setValue:self.titleTextField.text forKey:@"title"];
+        [self.event setValue:self.datePicker.date forKey:@"date"];
         
     } else {
         // Create a new event
         NSManagedObject *newEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:context];
         [newEvent setValue:self.titleTextField.text forKey:@"title"];
+        [newEvent setValue:self.datePicker.date forKey:@"date"];
     }
     
     NSError *error = nil;
@@ -86,6 +93,13 @@
 - (IBAction)cancel:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [self.titleTextField resignFirstResponder];
+    
+    return NO;
 }
 
 @end

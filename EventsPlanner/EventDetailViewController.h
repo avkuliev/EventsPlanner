@@ -13,12 +13,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
+@property (nonatomic, strong) UILocalNotification *localNotifiaction;
 
 @property (strong) NSManagedObject *event;
 
-
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
-
 
 @end

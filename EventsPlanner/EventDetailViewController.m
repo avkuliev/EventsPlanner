@@ -71,6 +71,7 @@
     
     if (self.event) {
         // Update existing event
+        [[UIApplication sharedApplication] cancelLocalNotification:_localNotifiaction];
         [self.event setValue:self.titleTextField.text forKey:@"title"];
         [self.event setValue:self.datePicker.date forKey:@"date"];
         
@@ -86,6 +87,16 @@
     if (![context save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
+    
+    // Schedule the notification
+    UILocalNotification *eventNotification = [UILocalNotification new];
+    eventNotification.fireDate = self.datePicker.date;
+    eventNotification.alertBody = self.titleTextField.text;
+    eventNotification.alertAction = @"Show me the event";
+    eventNotification.timeZone = [NSTimeZone defaultTimeZone];
+    eventNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:eventNotification];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

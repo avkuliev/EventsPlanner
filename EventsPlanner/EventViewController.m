@@ -46,6 +46,8 @@
     self.events = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     [self.tableView reloadData];
+    
+    NSLog(@"number of notifications %d", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
 }
 
 - (void)viewDidLoad
@@ -57,6 +59,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,6 +121,15 @@
             NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
             return;
         }
+
+        // Cancel the event notification
+        NSArray *eventNotifications =[[UIApplication sharedApplication] scheduledLocalNotifications];
+        
+        if (eventNotifications.count == indexPath.row) {
+            
+            UILocalNotification *eventNotification = [eventNotifications objectAtIndex:indexPath.row];
+            [[UIApplication sharedApplication] cancelLocalNotification:eventNotification];
+        }
         
         // Remove event from table view
         [self.events removeObjectAtIndex:indexPath.row];
@@ -153,6 +166,9 @@
         NSManagedObject *selectedEvent = [self.events objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         EventDetailViewController *destViewController = segue.destinationViewController;
         destViewController.event = selectedEvent;
+        
+        NSArray *eventNotifiactions = [[UIApplication sharedApplication] scheduledLocalNotifications];
+        destViewController.localNotifiaction = [eventNotifiactions objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
     }
 }
 

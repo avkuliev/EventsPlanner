@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 
 @property (nonatomic, strong) UILocalNotification *localNotifiaction;
 

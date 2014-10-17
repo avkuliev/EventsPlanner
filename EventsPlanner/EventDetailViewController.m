@@ -43,6 +43,7 @@
     if (self.event) {
         [self.titleTextField setText:[self.event valueForKey:@"title"]];
         [self.datePicker setDate:[self.event valueForKey:@"date"]];
+        [self.eventImage setImage:[UIImage imageNamed:[self.event valueForKey:@"imageURL"]]];
     }
 }
 

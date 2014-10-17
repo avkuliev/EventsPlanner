@@ -91,9 +91,16 @@
     
     // Configure the cell...
     NSManagedObject *event = [self.events objectAtIndex:indexPath.row];
-    [cell.textLabel setText:[event valueForKey:@"title"]];
-    [cell.detailTextLabel setText:[[event valueForKey:@"date"] description]];
     
+    UILabel *eventName = (UILabel *)[cell viewWithTag:100];
+    [eventName setText:[event valueForKey:@"title"]];
+    
+    UILabel *eventTime = (UILabel *)[cell viewWithTag:101];
+    [eventTime setText:[[event valueForKey:@"date"] description]];
+    
+    // UIImageView *eventImage = (UIImageView *)[cell viewWithTag:102];
+    // eventImage.image = [UIImage imageNamed:[event valueForKey:@"imageURL"]];
+
     return cell;
 }
 
@@ -121,16 +128,16 @@
             NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
             return;
         }
-
+/*
         // Cancel the event notification
         NSArray *eventNotifications =[[UIApplication sharedApplication] scheduledLocalNotifications];
-        
+
         if (eventNotifications.count == indexPath.row) {
             
             UILocalNotification *eventNotification = [eventNotifications objectAtIndex:indexPath.row];
             [[UIApplication sharedApplication] cancelLocalNotification:eventNotification];
         }
-        
+*/
         // Remove event from table view
         [self.events removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];

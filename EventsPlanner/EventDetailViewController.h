@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventDetailViewController : UIViewController <UITextFieldDelegate>
+@interface EventDetailViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate,
+                                                        UINavigationControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
-@property (weak, nonatomic) IBOutlet UIImageView *eventImage;
+@property (strong, nonatomic) IBOutlet UITextField *titleTextField;
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UIImageView *eventImage;
+
 
 @property (nonatomic, strong) UILocalNotification *localNotifiaction;
 
@@ -20,5 +22,9 @@
 
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
+
+- (IBAction)takePhoto:(id)sender;
+- (IBAction)selectPhoto:(id)sender;
+
 
 @end

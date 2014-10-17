@@ -38,6 +38,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Device has no camera" delegate:nil
+                                                    cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+    }
+    
     self.titleTextField.delegate = self;
     
     if (self.event) {
@@ -72,7 +79,7 @@
     
     if (self.event) {
         // Update existing event
-        [[UIApplication sharedApplication] cancelLocalNotification:_localNotifiaction];
+        // [[UIApplication sharedApplication] cancelLocalNotification:_localNotifiaction];
         [self.event setValue:self.titleTextField.text forKey:@"title"];
         [self.event setValue:self.datePicker.date forKey:@"date"];
         
@@ -81,6 +88,7 @@
         NSManagedObject *newEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:context];
         [newEvent setValue:self.titleTextField.text forKey:@"title"];
         [newEvent setValue:self.datePicker.date forKey:@"date"];
+        // [newEvent setValue:[UIImage] forKey:@"imageURL"];
     }
     
     NSError *error = nil;
@@ -112,6 +120,43 @@
     [self.titleTextField resignFirstResponder];
     
     return NO;
+}
+
+
+# pragma mark - set event image
+
+
+- (IBAction)takePhoto:(id)sender {
+    
+    UIImagePickerController *picker = [UIImagePickerController new];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (IBAction)selectPhoto:(id)sender {
+    
+    UIImagePickerController *picker = [UIImagePickerController new];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    self.eventImage.image = chosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -10,7 +10,10 @@
 
 @interface EventDetailViewController ()
 
+@property (nonatomic, strong) NSString *imageURL;
+
 @end
+
 
 @implementation EventDetailViewController
 
@@ -50,7 +53,7 @@
     if (self.event) {
         [self.titleTextField setText:[self.event valueForKey:@"title"]];
         [self.datePicker setDate:[self.event valueForKey:@"date"]];
-        [self.eventImage setImage:[UIImage imageNamed:[self.event valueForKey:@"imageURL"]]];
+        [self.eventImage setImage:[UIImage imageWithContentsOfFile:[self.event valueForKey:@"imageURL"]]];
     }
 }
 
@@ -82,13 +85,14 @@
         // [[UIApplication sharedApplication] cancelLocalNotification:_localNotifiaction];
         [self.event setValue:self.titleTextField.text forKey:@"title"];
         [self.event setValue:self.datePicker.date forKey:@"date"];
+        [self.event setValue:self.imageURL forKey:@"imageURL"];
         
     } else {
         // Create a new event
         NSManagedObject *newEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:context];
         [newEvent setValue:self.titleTextField.text forKey:@"title"];
         [newEvent setValue:self.datePicker.date forKey:@"date"];
-        // [newEvent setValue:[UIImage] forKey:@"imageURL"];
+        [newEvent setValue:self.imageURL forKey:@"imageURL"];
     }
     
     NSError *error = nil;
@@ -149,6 +153,13 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    self.imageURL = info[UIImagePickerControllerReferenceURL];
+    
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+
+        UIImageWriteToSavedPhotosAlbum(chosenImage, nil, nil, nil);
+    }
+
     self.eventImage.image = chosenImage;
     
     [picker dismissViewControllerAnimated:YES completion:nil];

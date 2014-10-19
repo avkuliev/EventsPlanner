@@ -25,6 +25,7 @@
 		8993865919F00B630006BD34 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8993865819F00B630006BD34 /* Storyboard.storyboard */; };
 		8993865C19F00FC50006BD34 /* EventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8993865B19F00FC50006BD34 /* EventViewController.m */; };
 		8993865F19F010280006BD34 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8993865E19F010280006BD34 /* EventDetailViewController.m */; };
+		89CF056219F3DA5A00F7E4B3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CF056119F3DA5900F7E4B3 /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		8993865B19F00FC50006BD34 /* EventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventViewController.m; sourceTree = "<group>"; };
 		8993865D19F010280006BD34 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
 		8993865E19F010280006BD34 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		89CF056119F3DA5900F7E4B3 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89CF056219F3DA5A00F7E4B3 /* Social.framework in Frameworks */,
 				8993862619F009D20006BD34 /* CoreGraphics.framework in Frameworks */,
 				8993862A19F009D20006BD34 /* CoreData.framework in Frameworks */,
 				8993862819F009D20006BD34 /* UIKit.framework in Frameworks */,
@@ -111,6 +114,7 @@
 		8993862219F009D20006BD34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89CF056119F3DA5900F7E4B3 /* Social.framework */,
 				8993862319F009D20006BD34 /* Foundation.framework */,
 				8993862519F009D20006BD34 /* CoreGraphics.framework */,
 				8993862719F009D20006BD34 /* UIKit.framework */,
@@ -463,6 +467,7 @@
 				8993865419F009D30006BD34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8993865519F009D30006BD34 /* Build configuration list for PBXNativeTarget "EventsPlannerTests" */ = {
 			isa = XCConfigurationList;
@@ -471,6 +476,7 @@
 				8993865719F009D30006BD34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

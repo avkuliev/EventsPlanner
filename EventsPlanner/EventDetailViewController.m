@@ -7,6 +7,8 @@
 //
 
 #import "EventDetailViewController.h"
+#import <Social/Social.h>
+
 
 @interface EventDetailViewController ()
 
@@ -73,6 +75,8 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+# pragma mark - saving event
 
 - (IBAction)save:(id)sender {
     
@@ -150,6 +154,7 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -169,5 +174,29 @@
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+# pragma mark - social sharing
+
+
+- (IBAction)postToFacebook:(id)sender {
+    
+    SLComposeViewController *facebook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    [facebook setInitialText:self.titleTextField.text];
+    [facebook addImage:self.eventImage.image];
+    
+    [self presentViewController:facebook animated:YES completion:nil];
+    
+}
+
+- (IBAction)postToTwitter:(id)sender {
+    
+    SLComposeViewController *tweet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [tweet setInitialText:self.titleTextField.text];
+    [tweet addImage:self.eventImage.image];
+    
+    [self presentViewController:tweet animated:YES completion:nil];
+}
+
 
 @end

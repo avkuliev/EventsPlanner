@@ -27,4 +27,8 @@
 - (IBAction)selectPhoto:(id)sender;
 
 
+- (IBAction)postToFacebook:(id)sender;
+- (IBAction)postToTwitter:(id)sender;
+
+
 @end

@@ -16,9 +16,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *eventImage;
 
 
-@property (nonatomic, strong) UILocalNotification *localNotifiaction;
-@property (nonatomic, strong) UILocalNotification *localNotifiaction1;
-
 @property (strong) NSManagedObject *event;
 
 - (IBAction)save:(id)sender;

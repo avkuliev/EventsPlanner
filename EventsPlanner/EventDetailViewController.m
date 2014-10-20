@@ -86,8 +86,16 @@
     
     if (self.event) {
         // Update existing event
-        // [[UIApplication sharedApplication] cancelLocalNotification:_localNotifiaction];
-        // [[UIApplication sharedApplication] cancelLocalNotification:_localNotifiaction1];
+
+        // Cancel the event notification
+        NSArray *eventNotifications =[[UIApplication sharedApplication] scheduledLocalNotifications];
+
+        for (UILocalNotification *eventNotification in eventNotifications) {
+            if ([eventNotification.alertBody isEqualToString:[self.event valueForKey:@"title"]]) {
+                NSLog(@"cancel the notification %@", eventNotification.alertBody);
+                [[UIApplication sharedApplication] cancelLocalNotification:eventNotification];
+            }
+        }
         [self.event setValue:self.titleTextField.text forKey:@"title"];
         [self.event setValue:self.datePicker.date forKey:@"date"];
         [self.event setValue:self.imageURL forKey:@"imageURL"];
@@ -203,6 +211,5 @@
     
     [self presentViewController:tweet animated:YES completion:nil];
 }
-
 
 @end

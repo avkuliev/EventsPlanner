@@ -12,7 +12,7 @@
 
 @interface EventDetailViewController ()
 
-@property (nonatomic, strong) NSString *imageURL;
+@property (nonatomic, copy) NSString *imageURL;
 
 @end
 
@@ -44,7 +44,7 @@
     // Do any additional setup after loading the view.
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Device has no camera" delegate:nil
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Device has no camera" delegate:nil
                                                     cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];

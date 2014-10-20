@@ -128,14 +128,16 @@
             NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
             return;
         }
-/*
-        // Cancel the event notification
-        NSArray *eventNotifications =[[UIApplication sharedApplication] scheduledLocalNotifications];
 
-        if (eventNotifications.count == indexPath.row) {
+        // Cancel the event notification
+/*        NSArray *eventNotifications =[[UIApplication sharedApplication] scheduledLocalNotifications];
+
+        if (eventNotifications.count > indexPath.row) {
             
-            UILocalNotification *eventNotification = [eventNotifications objectAtIndex:indexPath.row];
+            UILocalNotification *eventNotification = [eventNotifications objectAtIndex:(indexPath.row + indexPath.row - 1)];
             [[UIApplication sharedApplication] cancelLocalNotification:eventNotification];
+            UILocalNotification *eventNotification1 = [eventNotifications objectAtIndex:(indexPath.row + indexPath.row)];
+            [[UIApplication sharedApplication] cancelLocalNotification:eventNotification1];
         }
 */
         // Remove event from table view
@@ -173,9 +175,19 @@
         NSManagedObject *selectedEvent = [self.events objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         EventDetailViewController *destViewController = segue.destinationViewController;
         destViewController.event = selectedEvent;
-        
+/*
         NSArray *eventNotifiactions = [[UIApplication sharedApplication] scheduledLocalNotifications];
-        destViewController.localNotifiaction = [eventNotifiactions objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+
+        if (eventNotifiactions.count > [[self.tableView indexPathForSelectedRow] row]) {
+
+            NSInteger notificationIndex = [[self.tableView indexPathForSelectedRow] row] + [[self.tableView indexPathForSelectedRow] row] - 1;
+            destViewController.localNotifiaction = [eventNotifiactions objectAtIndex:notificationIndex];
+            
+            NSInteger notificationIndex1 = [[self.tableView indexPathForSelectedRow] row] + [[self.tableView indexPathForSelectedRow] row];
+            destViewController.localNotifiaction1 = [eventNotifiactions objectAtIndex:notificationIndex1];
+
+        }
+*/
     }
 }
 

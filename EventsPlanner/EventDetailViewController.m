@@ -87,6 +87,7 @@
     if (self.event) {
         // Update existing event
         // [[UIApplication sharedApplication] cancelLocalNotification:_localNotifiaction];
+        // [[UIApplication sharedApplication] cancelLocalNotification:_localNotifiaction1];
         [self.event setValue:self.titleTextField.text forKey:@"title"];
         [self.event setValue:self.datePicker.date forKey:@"date"];
         [self.event setValue:self.imageURL forKey:@"imageURL"];
@@ -106,8 +107,9 @@
     }
     
     // Schedule the notification
+    NSDate *fiveMinutesBeforeDate = [NSDate dateWithTimeInterval:-60*5 sinceDate:self.datePicker.date];
     UILocalNotification *eventNotification = [UILocalNotification new];
-    eventNotification.fireDate = self.datePicker.date;
+    eventNotification.fireDate = fiveMinutesBeforeDate;
     eventNotification.alertBody = self.titleTextField.text;
     eventNotification.alertAction = @"Show me the event";
     eventNotification.timeZone = [NSTimeZone defaultTimeZone];
@@ -115,6 +117,10 @@
     
     [[UIApplication sharedApplication] scheduleLocalNotification:eventNotification];
     
+    eventNotification.fireDate = self.datePicker.date;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:eventNotification];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

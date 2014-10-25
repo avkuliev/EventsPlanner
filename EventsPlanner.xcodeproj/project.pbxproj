@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89301ED919FBC3F9006AE213 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 89301ED819FBC3F9006AE213 /* README.md */; };
 		8993862419F009D20006BD34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8993862319F009D20006BD34 /* Foundation.framework */; };
 		8993862619F009D20006BD34 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8993862519F009D20006BD34 /* CoreGraphics.framework */; };
 		8993862819F009D20006BD34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8993862719F009D20006BD34 /* UIKit.framework */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		89301ED819FBC3F9006AE213 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		8993862019F009D20006BD34 /* EventsPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventsPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8993862319F009D20006BD34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8993862519F009D20006BD34 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,6 +97,7 @@
 		8993861719F009D20006BD34 = {
 			isa = PBXGroup;
 			children = (
+				89301ED819FBC3F9006AE213 /* README.md */,
 				8993862B19F009D20006BD34 /* EventsPlanner */,
 				8993864819F009D30006BD34 /* EventsPlannerTests */,
 				8993862219F009D20006BD34 /* Frameworks */,
@@ -247,6 +250,7 @@
 			files = (
 				8993863019F009D20006BD34 /* InfoPlist.strings in Resources */,
 				8993863B19F009D20006BD34 /* Images.xcassets in Resources */,
+				89301ED919FBC3F9006AE213 /* README.md in Resources */,
 				8993865919F00B630006BD34 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

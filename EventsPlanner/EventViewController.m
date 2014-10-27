@@ -8,14 +8,34 @@
 
 #import "EventViewController.h"
 #import "EventDetailViewController.h"
+#import "AppDelegate.h"
+
 
 @interface EventViewController ()
 
 @property (strong) NSMutableArray *events;
 
+@property (nonatomic, strong) AppDelegate *appDelegate;
+
+-(void)requestAccessToEvents;
+
 @end
 
 @implementation EventViewController
+
+-(void)requestAccessToEvents {
+    
+    [self.appDelegate.eventManager.eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error){
+        if (error == nil) {
+            // Store the returned granted value
+            self.appDelegate.eventManager.eventsAccessGranted = granted;
+        } else {
+            // In case of error, just log its description to the debugger
+            NSLog(@"%@", [error localizedDescription]);
+            
+        }
+    }];
+}
 
 - (NSManagedObjectContext *)managedObjectContext {
     
@@ -60,7 +80,11 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    [self performSelector:@selector(requestAccessToEvents) withObject:nil afterDelay:0.4];
 }
 
 - (void)didReceiveMemoryWarning

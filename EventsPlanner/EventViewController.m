@@ -14,12 +14,12 @@
 @interface EventViewController ()
 
 @property (strong) NSMutableArray *events;
-
 @property (nonatomic, strong) AppDelegate *appDelegate;
 
 -(void)requestAccessToEvents;
 
 @end
+
 
 @implementation EventViewController
 
@@ -80,11 +80,12 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     [self performSelector:@selector(requestAccessToEvents) withObject:nil afterDelay:0.4];
+    
 }
 
 - (void)didReceiveMemoryWarning

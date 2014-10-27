@@ -128,6 +128,8 @@
     eventNotification.fireDate = self.datePicker.date;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:eventNotification];
+    
+    
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }

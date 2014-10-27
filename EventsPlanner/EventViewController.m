@@ -148,13 +148,11 @@
         NSManagedObject *event = [self.events objectAtIndex:indexPath.row];
         
         // Cancel the event notification
-        NSArray *eventNotifications =[[UIApplication sharedApplication] scheduledLocalNotifications];
+        [self.appDelegate.eventManager deleteLocalNotificationWithName:[event valueForKey:@"title"]];
         
-        for (UILocalNotification *eventNotification in eventNotifications) {
-            if ([eventNotification.alertBody isEqualToString:[event valueForKey:@"title"]]) {
-                NSLog(@"cancel the notification %@", eventNotification.alertBody);
-                [[UIApplication sharedApplication] cancelLocalNotification:eventNotification];
-            }
+        // Delete event from the calendar
+        if (self.appDelegate.eventManager.eventsAccessGranted) {
+            [self.appDelegate.eventManager deleteEventFromCalendar:[event valueForKey:@"title"]];
         }
         
         // Delete object from database
@@ -166,7 +164,6 @@
             return;
         }
 
-        
         // Remove event from table view
         [self.events removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];

@@ -14,4 +14,10 @@
 @property (nonatomic, strong) EKEventStore *eventStore;
 @property (nonatomic) BOOL eventsAccessGranted;
 
+-(void)addLocalNotification:(NSDate *)notificationDate textBody:(NSString *)alertBody;
+-(void)deleteLocalNotificationWithName:(NSString *)notificationTitle;
+
+-(void)addEventToCalendar:(NSString *)eventName withTime:(NSDate *)date;
+-(void)deleteEventFromCalendar:(NSString *)eventName;
+
 @end

@@ -8,11 +8,13 @@
 
 #import "EventDetailViewController.h"
 #import <Social/Social.h>
+#import "AppDelegate.h"
 
 
 @interface EventDetailViewController ()
 
-@property (nonatomic, copy) NSString *imageURL;
+@property (nonatomic, strong) NSString *imageURL;
+@property (nonatomic, strong) AppDelegate *appDelegate;
 
 @end
 
@@ -42,6 +44,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Device has no camera" delegate:nil
@@ -88,14 +92,13 @@
         // Update existing event
 
         // Cancel the event notification
-        NSArray *eventNotifications =[[UIApplication sharedApplication] scheduledLocalNotifications];
-
-        for (UILocalNotification *eventNotification in eventNotifications) {
-            if ([eventNotification.alertBody isEqualToString:[self.event valueForKey:@"title"]]) {
-                NSLog(@"cancel the notification %@", eventNotification.alertBody);
-                [[UIApplication sharedApplication] cancelLocalNotification:eventNotification];
-            }
+        [self.appDelegate.eventManager deleteLocalNotificationWithName:[self.event valueForKey:@"title"]];
+        
+        // Delete event from the calendar
+        if (self.appDelegate.eventManager.eventsAccessGranted) {
+            [self.appDelegate.eventManager deleteEventFromCalendar:[self.event valueForKey:@"title"]];
         }
+        
         [self.event setValue:self.titleTextField.text forKey:@"title"];
         [self.event setValue:self.datePicker.date forKey:@"date"];
         [self.event setValue:self.imageURL forKey:@"imageURL"];
@@ -114,23 +117,18 @@
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
     
+    
     // Schedule the notification
     NSDate *fiveMinutesBeforeDate = [NSDate dateWithTimeInterval:-60*5 sinceDate:self.datePicker.date];
-    UILocalNotification *eventNotification = [UILocalNotification new];
-    eventNotification.fireDate = fiveMinutesBeforeDate;
-    eventNotification.alertBody = self.titleTextField.text;
-    eventNotification.alertAction = @"Show me the event";
-    eventNotification.timeZone = [NSTimeZone defaultTimeZone];
-    eventNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
     
-    [[UIApplication sharedApplication] scheduleLocalNotification:eventNotification];
+    [self.appDelegate.eventManager addLocalNotification:fiveMinutesBeforeDate textBody:self.titleTextField.text];
+    [self.appDelegate.eventManager addLocalNotification:self.datePicker.date textBody:self.titleTextField.text];
     
-    eventNotification.fireDate = self.datePicker.date;
+    // Add event to the calendar
+    if (self.appDelegate.eventManager.eventsAccessGranted) {
+        [self.appDelegate.eventManager addEventToCalendar:self.titleTextField.text withTime:self.datePicker.date];
+    }
     
-    [[UIApplication sharedApplication] scheduleLocalNotification:eventNotification];
-    
-    
-
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -180,7 +178,6 @@
 
         UIImageWriteToSavedPhotosAlbum(chosenImage, nil, nil, nil);
     }
-
     self.eventImage.image = chosenImage;
     
     [picker dismissViewControllerAnimated:YES completion:nil];

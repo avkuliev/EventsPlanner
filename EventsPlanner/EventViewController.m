@@ -66,8 +66,14 @@
     self.events = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     [self.tableView reloadData];
-    
+/*
     NSLog(@"number of notifications %d", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
+    
+    for (UILocalNotification *notification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        NSLog(@"notification %@", notification.alertBody);
+    }
+*/
+    
 }
 
 - (void)viewDidLoad
@@ -82,7 +88,7 @@
     
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    // [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     [self performSelector:@selector(requestAccessToEvents) withObject:nil afterDelay:0.4];
     

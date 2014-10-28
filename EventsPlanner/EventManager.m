@@ -53,7 +53,8 @@
 
     for (UILocalNotification *eventNotification in eventNotifications) {
         if ([eventNotification.alertBody isEqualToString:notificationTitle]) {
-            NSLog(@"cancel the notification %@", eventNotification.alertBody);
+            
+            // NSLog(@"cancel the notification %@", eventNotification.alertBody);
             [[UIApplication sharedApplication] cancelLocalNotification:eventNotification];
         }
     }
@@ -93,7 +94,7 @@
                 // Display the error description
                 NSLog(@"Can't delete in the calendar! %@ %@", error, [error localizedDescription]);
             }
-            NSLog(@"delete event from calendar %@", event.title);
+            // NSLog(@"delete event from calendar %@", event.title);
         }
     }
 }

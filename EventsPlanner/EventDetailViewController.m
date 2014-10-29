@@ -59,7 +59,12 @@
     if (self.event) {
         [self.titleTextField setText:[self.event valueForKey:@"title"]];
         [self.datePicker setDate:[self.event valueForKey:@"date"]];
-        [self.eventImage setImage:[UIImage imageWithContentsOfFile:[self.event valueForKey:@"imageURL"]]];
+        
+        NSURL *imageURL = [NSURL URLWithString:[self.event valueForKey:@"imageURL"]];
+        
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        
+        [self.eventImage setImage:[UIImage imageWithData:imageData]];
     }
 }
 
@@ -172,7 +177,9 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    self.imageURL = info[UIImagePickerControllerReferenceURL];
+    NSURL *chosenImageURL = info[UIImagePickerControllerReferenceURL];
+    
+    self.imageURL = [chosenImageURL absoluteString];
     
     if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
 
@@ -181,6 +188,7 @@
     self.eventImage.image = chosenImage;
     
     [picker dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

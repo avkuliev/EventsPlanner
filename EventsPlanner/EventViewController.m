@@ -129,9 +129,16 @@
     UILabel *eventTime = (UILabel *)[cell viewWithTag:101];
     [eventTime setText:[[event valueForKey:@"date"] description]];
     
+    
     UIImageView *eventImage = (UIImageView *)[cell viewWithTag:102];
-    eventImage.image = [UIImage imageWithContentsOfFile:[event valueForKey:@"imageURL"]];
+    
+    NSURL *imageURL = [NSURL URLWithString:[event valueForKey:@"imageURL"]];
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+    
+    [eventImage setImage:[UIImage imageWithData:imageData]];
 
+    
     return cell;
 }
 

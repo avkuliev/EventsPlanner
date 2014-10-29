@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <EventKit/EventKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface EventManager : NSObject
 
 @property (nonatomic, strong) EKEventStore *eventStore;
 @property (nonatomic) BOOL eventsAccessGranted;
+
+-(void)loadImage:(UIImageView *)eventImage withURL:(NSURL *)imageURL;
 
 -(void)addLocalNotification:(NSDate *)notificationDate textBody:(NSString *)alertBody;
 -(void)deleteLocalNotificationWithName:(NSString *)notificationTitle;

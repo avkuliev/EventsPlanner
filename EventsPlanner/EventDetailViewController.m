@@ -59,12 +59,7 @@
     if (self.event) {
         [self.titleTextField setText:[self.event valueForKey:@"title"]];
         [self.datePicker setDate:[self.event valueForKey:@"date"]];
-        
-        NSURL *imageURL = [NSURL URLWithString:[self.event valueForKey:@"imageURL"]];
-        
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        
-        [self.eventImage setImage:[UIImage imageWithData:imageData]];
+        [self.appDelegate.eventManager loadImage:self.eventImage withURL:[NSURL URLWithString:[self.event valueForKey:@"imageURL"]]];
     }
 }
 

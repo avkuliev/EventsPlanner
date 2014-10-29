@@ -13,6 +13,7 @@
 
 @interface EventViewController ()
 
+
 @property (strong) NSMutableArray *events;
 @property (nonatomic, strong) AppDelegate *appDelegate;
 
@@ -22,6 +23,7 @@
 
 
 @implementation EventViewController
+
 
 -(void)requestAccessToEvents {
     
@@ -132,12 +134,7 @@
     
     UIImageView *eventImage = (UIImageView *)[cell viewWithTag:102];
     
-    NSURL *imageURL = [NSURL URLWithString:[event valueForKey:@"imageURL"]];
-    
-    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-    
-    [eventImage setImage:[UIImage imageWithData:imageData]];
-
+    [self.appDelegate.eventManager loadImage:eventImage withURL:[NSURL URLWithString:[event valueForKey:@"imageURL"]]];
     
     return cell;
 }

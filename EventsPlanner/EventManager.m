@@ -35,6 +35,27 @@
     [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:eventsAccessGranted] forKey:@"eventkit_events_access_granted"];
 }
 
+-(void)loadImage:(UIImageView *)eventImage withURL:(NSURL *)imageURL {
+    
+    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset) {
+        ALAssetRepresentation *rep = [myasset defaultRepresentation];
+        CGImageRef iref = [rep fullResolutionImage];
+        if (iref) {
+            eventImage.image = [UIImage imageWithCGImage:iref];
+        }
+    };
+    
+    ALAssetsLibraryAccessFailureBlock failureblock = ^(NSError *myerror) {
+        NSLog(@"Can't get image - %@", [myerror localizedDescription]);
+    };
+    
+    NSURL *asseturl = imageURL;
+    
+    ALAssetsLibrary *assetslibrary = [ALAssetsLibrary new];
+    [assetslibrary assetForURL:asseturl resultBlock:resultblock failureBlock:failureblock];
+}
+
+
 -(void)addLocalNotification:(NSDate *)notificationDate textBody:(NSString *)alertBody {
     
     UILocalNotification *eventNotification = [UILocalNotification new];
